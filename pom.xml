@@ -68,7 +68,7 @@
                   <element>CLASS</element>
                   <limits>
                     <limit>
-                      <counter>BRANCHES</counter>
+                      <counter>BRANCH</counter>
                       <value>COVEREDRATIO</value>
                       <minimum>1.0</minimum>
                     </limit>
