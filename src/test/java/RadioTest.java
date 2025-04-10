@@ -78,4 +78,12 @@ class RadioTest {
         radio.decreaseVolume();
         assertEquals(0, radio.getCurrentVolume());
     }
+
+    @Test
+    void shouldKeepCurrentStationWhenSettingInvalid() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(5);
+        radio.setCurrentStation(999);
+        assertEquals(5, radio.getCurrentStation());
+    }
 }
