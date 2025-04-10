@@ -3,6 +3,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
     @Test
+    void shouldCreateDefaultRadio() {
+        Radio radio = new Radio();
+        assertEquals(9, radio.getMaxStation());
+    }
+
+    @Test
+    void shouldCreateCustomRadio() {
+        Radio radio = new Radio(15);
+        assertEquals(14, radio.getMaxStation());
+    }
+
+    @Test
+    void shouldThrowExceptionForInvalidStationCount() {
+        assertThrows(IllegalArgumentException.class, () -> new Radio(0));
+        assertThrows(IllegalArgumentException.class, () -> new Radio(-5));
+    }
+
+    @Test
     void shouldSetValidStation() {
         Radio radio = new Radio();
         radio.setCurrentStation(1);
@@ -49,6 +67,20 @@ class RadioTest {
     }
 
     @Test
+    void shouldWorkWithCustomStations() {
+        Radio radio = new Radio(30);
+        assertEquals(29, radio.getMaxStation());
+
+        radio.setCurrentStation(29);
+        radio.nextStation();
+        assertEquals(0, radio.getCurrentStation());
+
+        radio.setCurrentStation(0);
+        radio.prevStation();
+        assertEquals(29, radio.getCurrentStation());
+    }
+
+    @Test
     void shouldIncreaseVolume() {
         Radio radio = new Radio();
         radio.increaseVolume();
@@ -58,10 +90,10 @@ class RadioTest {
     @Test
     void shouldNotIncreaseMaxVolume() {
         Radio radio = new Radio();
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 101; i++) {
             radio.increaseVolume();
         }
-        assertEquals(10, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
